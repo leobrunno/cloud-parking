@@ -58,4 +58,16 @@ public class ParkingService {
         Parking parking = findById(id);
         parkingRepository.deleteById(id);
     }
+
+    @Transactional
+    public Parking update(String id, Parking parkingUpdate) {
+        Parking parking = findById(id);
+        parking.setColor(parkingUpdate.getColor());
+        parking.setModel(parkingUpdate.getModel());
+        parking.setLicence(parkingUpdate.getLicence());
+        parking.setState(parkingUpdate.getState());
+
+        parkingRepository.save(parkingUpdate);
+        return parking;
+    }
 }
