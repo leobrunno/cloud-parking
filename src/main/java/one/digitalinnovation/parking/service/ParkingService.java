@@ -52,4 +52,10 @@ public class ParkingService {
         parkingRepository.save(parkingCreate);
         return parkingCreate;
     }
+
+    @Transactional
+    public void delete(String id) {
+        Parking parking = findById(id);
+        parkingRepository.deleteById(id);
+    }
 }
