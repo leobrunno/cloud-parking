@@ -70,4 +70,14 @@ public class ParkingService {
         parkingRepository.save(parkingUpdate);
         return parking;
     }
+
+    @Transactional
+    public Parking checkOut(String id) {
+        Parking parking = findById(id);
+        parking.setExitDate(LocalDateTime.now());
+        parking.setBill(ParkingCheckOut.getBill(parking));
+
+        parkingRepository.save(parking);
+        return parking;
+    }
 }
