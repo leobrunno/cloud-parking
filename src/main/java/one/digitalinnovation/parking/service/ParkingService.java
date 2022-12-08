@@ -67,7 +67,7 @@ public class ParkingService {
         parking.setLicence(parkingUpdate.getLicence());
         parking.setState(parkingUpdate.getState());
 
-        parkingRepository.save(parkingUpdate);
+        parkingRepository.save(parking);
         return parking;
     }
 
