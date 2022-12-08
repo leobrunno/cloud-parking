@@ -23,4 +23,8 @@ public class ParkingMapper {
                 Collectors.toList()
         );
     }
+
+    public Parking toParkingCreate(ParkingCreateDTO parkingCreateDTO) {
+        return MODEL_MAPPER.map(parkingCreateDTO, Parking.class);
+    }
 }

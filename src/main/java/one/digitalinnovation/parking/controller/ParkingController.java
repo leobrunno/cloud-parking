@@ -3,9 +3,11 @@ package one.digitalinnovation.parking.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import one.digitalinnovation.parking.model.Parking;
+import one.digitalinnovation.parking.model.dto.ParkingCreateDTO;
 import one.digitalinnovation.parking.model.dto.ParkingDTO;
 import one.digitalinnovation.parking.model.mapper.ParkingMapper;
 import one.digitalinnovation.parking.service.ParkingService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,5 +42,16 @@ public class ParkingController {
         ParkingDTO result = parkingMapper.toParkingDTO(parking);
 
         return ResponseEntity.ok(result);
+    }
+
+    @PostMapping
+    @ApiOperation("Create parking")
+    public ResponseEntity<ParkingDTO> create(@RequestBody ParkingCreateDTO parkingCreateDTO) {
+        Parking parkingCreate = parkingMapper.toParkingCreate(parkingCreateDTO);
+        Parking parking = parkingService.create(parkingCreate);
+
+        ParkingDTO result = parkingMapper.toParkingDTO(parking);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 }
